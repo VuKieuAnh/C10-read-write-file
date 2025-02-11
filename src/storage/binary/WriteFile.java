@@ -6,16 +6,21 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WriteFile {
-    public static void main(String[] args) {
-        Student s = new Student(1, "CG01", "Tam An");
-        Student s1 = new Student(2, "CG02", "Thao An");
-        List<Student> students = new ArrayList<Student>();
-        students.add(s);
-        students.add(s1);
-        writeFile(students);
+public class WriteFile implements IWriteFile {
+//    singleton, chi tao 1 doi tuong
+//    1: tao static instance
+    private static WriteFile instance;
+
+    private WriteFile() {
     }
-    public static void writeFile(List<Student> students) {
+
+    public synchronized static WriteFile getInstance() {
+        if (instance == null) {
+            instance = new WriteFile();
+        }
+        return instance;
+    }
+    public void writeFile(List<Student> students) {
         File file = new File("students.dat");
         ObjectOutputStream objectOutputStream = null;
         try {
