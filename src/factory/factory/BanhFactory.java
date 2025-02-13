@@ -5,8 +5,17 @@ import factory.model.BanhDeo;
 import factory.model.BanhNuong;
 
 public class BanhFactory {
+    private static BanhFactory instance;
 
-    public static Banh createBanh(String type) {
+    private BanhFactory() {}
+
+    public synchronized static BanhFactory getInstance() {
+        if(instance == null) {
+            instance = new BanhFactory();
+        }
+        return instance;
+    }
+    public Banh createBanh(String type) {
         switch (type) {
             case "BanhNuong":
                 return new BanhNuong();

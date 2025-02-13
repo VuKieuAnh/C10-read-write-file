@@ -11,6 +11,6 @@ public class Main {
         System.out.println("Nhap vao loai banh");
         Scanner scanner = new Scanner(System.in);
         String type = scanner.nextLine();
-        Banh a = BanhFactory.createBanh(type);
+        Banh a = BanhFactory.getInstance().createBanh(type);
     }
 }
